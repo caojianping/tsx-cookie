@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cookie测试</title>
+  </head>
+  <body>
+    <script src="../dist/cookie.umd.js"></script>
+    <script>
+      var Cookie = window.Cookie;
+      if (Cookie) {
+        var expires = 3600 * 1000 * 2; // 过期时间
+        Cookie.setItem('test_number', 999, expires);
+        console.log('Cookie.test_number:', Cookie.getItem('test_number'));
+
+        Cookie.setItem('test_obj', { id: 1, name: 'cjp' }, expires);
+        console.log('Cookie.test_obj:', Cookie.getItem('test_obj'));
+
+        console.log('Cookie.getAllKeys:', Cookie.getAllKeys());
+
+        setTimeout(() => {
+          Cookie.clear();
+          console.log('Cookie.getAllKeys 3秒后:', Cookie.getAllKeys());
+
+          Cookie.setItem('test_string', 'abc', expires, '/');
+          console.log('Cookie.test_string:', Cookie.getItem('test_string'));
+        }, 3000);
+
+        setTimeout(() => {
+          Cookie.removeItem('test_string', '/');
+          // 或者Cookie.clear('/');
+          console.log('Cookie.getAllKeys 3秒后:', Cookie.getAllKeys());
+        }, 6000);
+      }
+    </script>
+  </body>
+</html>
